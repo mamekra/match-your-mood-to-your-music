@@ -4,7 +4,7 @@ import pandas as pd
 file_path = r'C:/Users/user/Documents/ΠΜΣ DWS/NLP/project/song_lyrics.csv'
 
 # Read only the first 1,000,000 rows of the CSV file
-df = pd.read_csv(file_path, nrows=300_000)
+df = pd.read_csv(file_path, nrows=100_000)
 
 # Path to save the new CSV file
 output_file_path = r'C:/Users/user/Documents/ΠΜΣ DWS/NLP/project/song_lyrics_subset.csv'
