@@ -1,7 +1,6 @@
 import pandas as pd
 from nrclex import NRCLex
 import nltk
-import joblib
 
 nltk.download('punkt')
 
@@ -36,7 +35,3 @@ print(df[['cleaned_lyrics', 'emotion']].head())
 # Save the DataFrame to a CSV file
 df.to_csv(OUTPUT_PATH, index=False)
 print(f"DataFrame saved to {OUTPUT_PATH}")
-
-# Save the DataFrame using Joblib
-joblib.dump(df, 'labeled_songs.joblib')
-print('DataFrame saved using Joblib')
