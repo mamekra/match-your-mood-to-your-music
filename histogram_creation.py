@@ -24,7 +24,7 @@ rects1 = ax.bar(ind,
 rects2 = ax.bar(ind+width,
                 accuracy,
                 width,
-                color= '#2a2747',
+git                 color= '#2a2747',
                 edgecolor='white')
 
 # axes and labels
