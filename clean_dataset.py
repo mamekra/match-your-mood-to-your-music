@@ -10,7 +10,7 @@ nltk.download('stopwords')
 nltk.download('punkt_tab')
 
 # Path to the dataset file
-DATASET_PATH = 'song_lyrics_subset.csv'  # Replace with the actual path to your dataset
+DATASET_PATH = 'song_lyrics.csv'  # Replace with the actual path to your dataset
 OUTPUT_PATH = 'cleaned_songs.csv'  # Path to save the cleaned dataset
 
 def clean_lyrics(text):
@@ -38,7 +38,8 @@ def main():
     print("Loading dataset...")
     # Load the dataset
     try:
-        dataset = pd.read_csv(DATASET_PATH)
+        # Load only the first 100,000 rows from the Genius
+        dataset = pd.read_csv(DATASET_PATH, nrows=100000)
     except FileNotFoundError:
         print(f"Error: File not found at {DATASET_PATH}. Please check the path and try again.")
         return
