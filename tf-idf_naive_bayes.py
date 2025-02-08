@@ -4,7 +4,8 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB
-from sklearn.metrics import accuracy_score, classification_report, precision_recall_fscore_support
+from sklearn.metrics import accuracy_score, classification_report, precision_recall_fscore_support, roc_auc_score
+from sklearn.preprocessing import label_binarize
 import matplotlib.pyplot as plt
 
 # Load the dataset
@@ -37,14 +38,22 @@ nb_model.fit(X_train, y_train)
 print("prediction....")
 # Make predictions on the validation set
 y_pred = nb_model.predict(X_val)
+y_proba = nb_model.predict_proba(X_val)
 
 print("evaluation....")
 # Evaluate the model
 accuracy = accuracy_score(y_val, y_pred)
 precision, recall, _, _ = precision_recall_fscore_support(y_val, y_pred, average='weighted')
+
+# Compute AUC-ROC score
+# Binarize the labels for AUC-ROC calculation
+y_val_binarized = label_binarize(y_val, classes=list(range(len(emotion_classes))))
+auc_roc = roc_auc_score(y_val_binarized, y_proba, multi_class='ovr')
+
 print(f"Validation Accuracy: {accuracy}")
 print(f"Precision: {precision}")
 print(f"Recall: {recall}")
+print(f"ROC-AUC Score: {auc_roc}")
 print("\nClassification Report:\n", classification_report(y_val, y_pred, target_names=emotion_classes))
 
 # Save the TF-IDF vectorizer and Naive Bayes model
